@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>React Sports Game</title>
 </head>
 <body>
@@ -50,11 +51,11 @@ class Team extends React.Component {
     }
 
     render(){
-        let shotPercentageDiv
+        let shotPercentageDiv //Do not understand how this can be a variable with nothin in it
         if(this.state.shots){
         const shotPercentage = Math.round((this.state.score / this.state.shots) * 100)
         shotPercentageDiv = (<div>
-                <strong>Chances for success % {shotPercentage}</strong>
+                <strong>Chances for success are % {shotPercentage}</strong>
                 </div>)
         }
         return (
@@ -83,25 +84,66 @@ class Team extends React.Component {
 
     
 }
+//undefined name: ?
 
+function Game (props){
+    return (
+<div className = "Game">
+<h1>Welcome to {props.venue} </h1>
+<div className="stats">
+    <div>
+      <Team 
+      name = {props.visitingTeam.name}
+      logo = {props.visitingTeam.logoSrc} /> 
+      <br/>
 
+      <div className="versus">
+      <h1>VS!</h1></div>
+      <Team 
+      name = {props.homeTeam.name}
+      logo ={props.homeTeam.logoSrc}
+       /> 
+       </div>
+</div>
+</div>)
+
+}
 
 
 // An App component under which all other components will be added
 //add logo with logo
 function App (props) {
+    const rebels = {
+        name: 'Cork Town Rebels',
+        logoSrc:'/Users/cullen762/Documents/assessments/reactBasics_sportsGame/assets/th-1.jpg'
+    }
+
+    const rats = {
+        name: 'Seattle Street Rats',
+        logoSrc:'/Users/cullen762/Documents/assessments/reactBasics_sportsGame/assets/rat.jpg'
+    }
+
+    const karen = {
+        name: 'California Karens',
+        logoSrc:'/Users/cullen762/Documents/assessments/reactBasics_sportsGame/assets/Karen.jpg'
+
+    }
+    const retail ={
+        name:'bitter baristas',
+        logoSrc:'/Users/cullen762/Documents/assessments/reactBasics_sportsGame/assets/retail.jpg'
+    }
+
   return (
-    <div>
-      <Team 
-      name = "Cork Town rebels"
-      logo ="/Users/cullen762/Documents/assessments/reactBasics_sportsGame/assets/th-1.jpg" /> 
-      <br/>
-      <Team 
-      name = "Seattle street rats"
-      logo ="/Users/cullen762/Documents/assessments/reactBasics_sportsGame/assets/rat.jpg" /> 
-      
-      
-      
+      <div className="App">
+        <Game venue='the Seattle methamphetimine users safe space (formerly known as the library)'
+        homeTeam={rats}
+        visitingTeam={rebels}
+        />
+        <Game venue='another upper class strip mall '
+        homeTeam ={retail}
+        visitingTeam={karen}
+        />
+       
     </div>
   )
 }
